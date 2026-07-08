@@ -1,0 +1,137 @@
+<style>
+*{box-sizing:border-box;margin:0;padding:0;}
+body{background:#fff;font-family:system-ui,-apple-system,sans-serif;}
+canvas{display:block;border-radius:12px;border:1.5px solid #e8e8e8;touch-action:none;}
+.fml{font-size:13px;padding:10px 16px;border-radius:20px;background:#f5f5f5;border:1.5px solid #d0d0d0;color:#2c2c2a;margin:6px 0;font-family:ui-monospace,monospace;line-height:1.8;}
+.row{display:flex;align-items:center;gap:8px;margin:6px 0;flex-wrap:wrap;}
+.btn{padding:7px 15px;border-radius:20px;font-size:13px;font-weight:500;cursor:pointer;border:1.5px solid #d0d0d0;background:#fff;color:#2c2c2a;}
+.btn.on{border-color:#185fa5;background:#e6f1fb;color:#185fa5;}
+.btn.mode.on{border-color:#0F6E56;background:#e7f6ef;color:#0F6E56;}
+.info{font-size:12px;padding:8px 14px;border-radius:20px;background:#f5f5f5;border:1.5px solid #d0d0d0;color:#555;margin:6px 0;font-family:ui-monospace,monospace;line-height:1.7;}
+</style>
+
+<canvas id="cv" style="width:100%;height:58vh;min-height:360px;"></canvas>
+<div class="fml"><b style="color:#1D9E75">E = U + K = constante</b> (sans frottement) — l'énergie change de forme (potentielle ↔ cinétique), le total ne bouge pas</div>
+
+<div class="row">
+  <button class="btn mode on" id="s0" onclick="setSc(0)">Balle qui rebondit</button>
+  <button class="btn mode" id="s1" onclick="setSc(1)">Voiture (piste vallonnée)</button>
+  <button class="btn mode" id="s2" onclick="setSc(2)">Ressort</button>
+  <button class="btn mode" id="s3" onclick="setSc(3)">Pendule</button>
+</div>
+<div class="row">
+  <button class="btn on" id="bP" onclick="paused=!paused;this.textContent=paused?'Lecture':'Pause';this.className=paused?'btn':'btn on';">Pause</button>
+  <button class="btn" style="border-color:#f09595;background:#fcebeb;color:#a32d2d;" onclick="reset()">Relâcher</button>
+  <button class="btn" id="bFr" onclick="fric=!fric;this.className=fric?'btn on':'btn';reset();">Frottement</button>
+</div>
+<div class="info" id="info"></div>
+
+<script>
+const cv=document.getElementById('cv'),ctx=cv.getContext('2d');
+const RED='#E24B4A',BLUE='#378ADD',GREEN='#1D9E75',ORANGE='#D85A30',INK='#3d3d3a',GREY='#9aa0a6',AX='#c8ccd0';
+let W=0,H=0,dpr=1,sc=0,paused=false,fric=false;
+const gB=7.0, gN=2.7, kS=12, gP=5.5, Lp=1;
+let yb=1,vyb=0,hpeak=1;            // balle
+let cx=0.18,cvel=0,cE0=1;          // voiture
+let sx=1,sv=0;                     // ressort
+let pth=0.9,pom=0,pE0=1;           // pendule
+function setSc(n){sc=n;['s0','s1','s2','s3'].forEach((id,i)=>document.getElementById(id).className='btn mode'+(i===n?' on':''));reset();}
+function reset(){yb=1;vyb=0;hpeak=1;cx=0.18;cvel=0;cE0=gN*hV(0.18);sx=1;sv=0;pth=0.9;pom=0;pE0=gP*Lp*(1-Math.cos(0.9));}
+function syncSize(){const r=cv.getBoundingClientRect();dpr=window.devicePixelRatio||1;
+  const nW=Math.round(r.width)||700,nH=Math.round(r.height)||360;
+  if(nW!==W||nH!==H){W=nW;H=nH;cv.width=W*dpr;cv.height=H*dpr;}ctx.setTransform(dpr,0,0,dpr,0,0);}
+function hV(x){return 0.5*(1+Math.cos(2*Math.PI*x));}
+function hpV(x){return -Math.PI*Math.sin(2*Math.PI*x);}
+
+function drawBar(U,K,E0){
+  const gx=W*0.80,gw=W*0.11,gb=H*0.82,gt=H*0.10,gmax=gb-gt,s=gmax/(E0*1.03);
+  const E=U+K,dH=Math.max(0,(E0-E))*s,uH=U*s,kH=K*s;
+  ctx.strokeStyle='#e0e0e0';ctx.lineWidth=1.5;ctx.strokeRect(gx,gt,gw,gmax);
+  ctx.fillStyle=BLUE;ctx.fillRect(gx+2,gb-uH,gw-4,uH);
+  ctx.fillStyle=RED;ctx.fillRect(gx+2,gb-uH-kH,gw-4,kH);
+  if(dH>1){ctx.fillStyle='rgba(216,90,48,0.35)';ctx.fillRect(gx+2,gb-uH-kH-dH,gw-4,dH);}
+  ctx.strokeStyle=GREEN;ctx.setLineDash([4,3]);ctx.beginPath();ctx.moveTo(gx-6,gb-E0*s);ctx.lineTo(gx+gw+6,gb-E0*s);ctx.stroke();ctx.setLineDash([]);
+  ctx.fillStyle=GREEN;ctx.font='600 11px system-ui';ctx.textAlign='center';ctx.fillText('E₀',gx+gw/2,gb-E0*s-6);
+  ctx.font='600 12px system-ui';
+  if(uH>16){ctx.fillStyle='#fff';ctx.fillText('U',gx+gw/2,gb-uH/2+4);}
+  if(kH>16){ctx.fillStyle='#fff';ctx.fillText('K',gx+gw/2,gb-uH-kH/2+4);}
+  ctx.fillStyle=GREY;ctx.font='11px system-ui';ctx.fillText('énergie',gx+gw/2,gb+16);
+}
+function ballDraw(x,y,r){ctx.beginPath();ctx.arc(x,y,r,0,7);ctx.fillStyle='#fdece4';ctx.fill();ctx.strokeStyle=ORANGE;ctx.lineWidth=2.5;ctx.stroke();
+  ctx.beginPath();ctx.moveTo(x-r,y);ctx.lineTo(x+r,y);ctx.moveTo(x,y-r);ctx.lineTo(x,y+r);ctx.strokeStyle='rgba(216,90,48,0.5)';ctx.lineWidth=1;ctx.stroke();}
+function vArrow(x,y,vx,vy,col){const len=Math.hypot(vx,vy);if(len<4)return;const ex=x+vx,ey=y+vy;
+  ctx.strokeStyle=col;ctx.lineWidth=2.4;ctx.lineCap='round';ctx.beginPath();ctx.moveTo(x,y);ctx.lineTo(ex,ey);ctx.stroke();
+  const a=Math.atan2(vy,vx);ctx.fillStyle=col;ctx.save();ctx.translate(ex,ey);ctx.rotate(a);ctx.beginPath();ctx.moveTo(7,0);ctx.lineTo(-4,-4);ctx.lineTo(-4,4);ctx.closePath();ctx.fill();ctx.restore();}
+
+function draw(){syncSize();ctx.clearRect(0,0,W,H);ctx.fillStyle='#fff';ctx.fillRect(0,0,W,H);
+  const info=document.getElementById('info');let U=0,K=0,E0=1,msg='';
+
+  if(sc===0){ // BALLE
+    const dtb=0.016;
+    if(!paused){vyb-=gB*dtb;yb+=vyb*dtb;
+      if(yb<0){yb=0;hpeak=(fric?0.82*0.82:1)*hpeak;if(hpeak<0.012){hpeak=0;vyb=0;}else vyb=Math.sqrt(2*gB*hpeak);}}
+    U=gB*yb;K=0.5*vyb*vyb;E0=gB*1.0;
+    const mx=W*0.34,floor=H*0.82,top=H*0.12,hpx=(floor-top);
+    ctx.strokeStyle=INK;ctx.lineWidth=2.5;ctx.beginPath();ctx.moveTo(mx-80,floor);ctx.lineTo(mx+80,floor);ctx.stroke();
+    ctx.strokeStyle='#bbb';ctx.lineWidth=1;for(let h=mx-76;h<mx+80;h+=14){ctx.beginPath();ctx.moveTo(h,floor);ctx.lineTo(h-8,floor+9);ctx.stroke();}
+    const by=floor-yb*hpx;
+    ctx.strokeStyle=BLUE;ctx.setLineDash([3,3]);ctx.lineWidth=1.3;ctx.beginPath();ctx.moveTo(mx,by);ctx.lineTo(mx,floor);ctx.stroke();ctx.setLineDash([]);
+    ctx.fillStyle=BLUE;ctx.font='11px ui-monospace';ctx.textAlign='left';ctx.fillText('h='+yb.toFixed(2),mx+16,(by+floor)/2);
+    ballDraw(mx,by-14,14);
+    if(Math.abs(vyb)>0.3)vArrow(mx+26,by-14,0,-vyb*11,RED);
+    msg='Balle lâchée d\'une hauteur h : en haut tout est potentiel (v=0), au sol tout est cinétique (v max). '+(fric?'Avec pertes, elle rebondit de moins en moins haut et finit à l\'arrêt (E → 0, tout dissipé).':'Sans perte, elle remonte toujours à la même hauteur.');
+  }
+  else if(sc===1){ // VOITURE
+    const mx=W*0.06,tw=W*0.66,baseY=H*0.82,hpx=H*0.60,SX=x=>mx+x*tw,SY=h=>baseY-h*hpx,dtc=0.018;
+    if(!paused){for(let it=0;it<3;it++){const hp=hpV(cx),den=Math.sqrt(1+hp*hp);
+      cvel+=(-gN*hp/den)*dtc;
+      if(fric)cvel-=0.9*cvel*dtc;
+      cx+=cvel/den*dtc;
+      if(cx<0.03){cx=0.03;cvel=Math.abs(cvel);}if(cx>0.97){cx=0.97;cvel=-Math.abs(cvel);}}}
+    U=gN*hV(cx);K=0.5*cvel*cvel;E0=cE0;
+    ctx.strokeStyle=INK;ctx.lineWidth=3;ctx.beginPath();for(let x=0;x<=1;x+=0.004){const p=SY(hV(x));x===0?ctx.moveTo(SX(x),p):ctx.lineTo(SX(x),p);}ctx.stroke();
+    ctx.strokeStyle='rgba(29,158,117,0.5)';ctx.setLineDash([5,4]);ctx.beginPath();ctx.moveTo(mx,SY(cE0/gN));ctx.lineTo(mx+tw,SY(cE0/gN));ctx.stroke();ctx.setLineDash([]);
+    ctx.fillStyle=GREEN;ctx.font='11px system-ui';ctx.textAlign='left';ctx.fillText('niveau de lâcher',mx+4,SY(cE0/gN)-5);
+    // voiture posée sur la piste, orientée selon la pente
+    const carX=SX(cx),carY=SY(hV(cx)),slope=Math.atan2(-hpV(cx)*hpx*0.004,tw*0.004);
+    ctx.save();ctx.translate(carX,carY);ctx.rotate(slope);
+    ctx.fillStyle='#eef4fb';ctx.strokeStyle=BLUE;ctx.lineWidth=2;ctx.beginPath();ctx.roundRect(-17,-19,34,15,4);ctx.fill();ctx.stroke();
+    ctx.beginPath();ctx.roundRect(-9,-27,17,9,3);ctx.fill();ctx.stroke();
+    ctx.fillStyle=INK;ctx.beginPath();ctx.arc(-9,-4,4.5,0,7);ctx.arc(9,-4,4.5,0,7);ctx.fill();
+    ctx.restore();
+    msg='Voiture (frein relâché) sur une piste : elle accélère en descendant (U→K) puis ralentit en montant (K→U). '+(fric?'Avec frottement, elle s\'arrête peu à peu au creux.':'Sans frottement, elle remonte à la même hauteur, indéfiniment.');
+  }
+  else if(sc===2){ // RESSORT
+    const dt=0.02;if(!paused){const a=-(kS)*sx-(fric?1.3:0)*sv;sv+=a*dt;sx+=sv*dt;}
+    U=0.5*kS*sx*sx;K=0.5*sv*sv;E0=0.5*kS*1;
+    const cyy=H*0.5,wallX=W*0.10,eqX=W*0.42,amp=W*0.20,mxp=eqX+sx*amp;
+    ctx.strokeStyle=INK;ctx.lineWidth=3;ctx.beginPath();ctx.moveTo(wallX,cyy-40);ctx.lineTo(wallX,cyy+40);ctx.stroke();
+    ctx.strokeStyle='#bbb';ctx.lineWidth=1;for(let hy=cyy-38;hy<cyy+40;hy+=10){ctx.beginPath();ctx.moveTo(wallX,hy);ctx.lineTo(wallX-8,hy+8);ctx.stroke();}
+    ctx.strokeStyle='#7f8790';ctx.lineWidth=2;ctx.beginPath();ctx.moveTo(wallX,cyy);const n=14;for(let i=0;i<=n;i++){const t=i/n,px=wallX+(mxp-24-wallX)*t,py=cyy+(i%2?10:-10)*(i>0&&i<n?1:0);ctx.lineTo(px,py);}ctx.lineTo(mxp-24,cyy);ctx.stroke();
+    ctx.strokeStyle='rgba(0,0,0,0.2)';ctx.setLineDash([3,4]);ctx.beginPath();ctx.moveTo(eqX,cyy-46);ctx.lineTo(eqX,cyy+46);ctx.stroke();ctx.setLineDash([]);
+    ctx.fillStyle=GREY;ctx.font='10px system-ui';ctx.textAlign='center';ctx.fillText('équilibre',eqX,cyy+60);
+    ctx.fillStyle='#eef4fb';ctx.strokeStyle=BLUE;ctx.lineWidth=2.5;ctx.beginPath();ctx.roundRect(mxp-24,cyy-22,48,44,6);ctx.fill();ctx.stroke();
+    if(Math.abs(sv)>0.3)vArrow(mxp,cyy-34,sv*11,0,RED);
+    msg='Masse sur ressort : à l\'écart max, tout est potentiel élastique U=½k·x² (v=0) ; au passage à l\'équilibre, tout est cinétique. '+(fric?'Le frottement amortit les oscillations.':'Sans frottement, l\'amplitude reste constante.');
+  }
+  else { // PENDULE
+    const dt=0.02;if(!paused){const a=-(gP/Lp)*Math.sin(pth)-(fric?0.4:0)*pom;pom+=a*dt;pth+=pom*dt;}
+    U=gP*Lp*(1-Math.cos(pth));K=0.5*(Lp*pom)*(Lp*pom);E0=pE0;
+    const PV={x:W*0.40,y:H*0.14},Lpx=H*0.44,bx=PV.x+Lpx*Math.sin(pth),by=PV.y+Lpx*Math.cos(pth),lowY=PV.y+Lpx;
+    ctx.strokeStyle=INK;ctx.lineWidth=3;ctx.beginPath();ctx.moveTo(PV.x-50,PV.y);ctx.lineTo(PV.x+50,PV.y);ctx.stroke();
+    ctx.strokeStyle='#bbb';ctx.lineWidth=1;for(let h=PV.x-44;h<PV.x+50;h+=10){ctx.beginPath();ctx.moveTo(h,PV.y);ctx.lineTo(h-7,PV.y-7);ctx.stroke();}
+    ctx.strokeStyle='rgba(0,0,0,0.15)';ctx.setLineDash([4,5]);ctx.beginPath();ctx.moveTo(PV.x-70,lowY);ctx.lineTo(bx+70,lowY);ctx.stroke();ctx.setLineDash([]);
+    ctx.strokeStyle=BLUE;ctx.setLineDash([3,3]);ctx.lineWidth=1.2;ctx.beginPath();ctx.moveTo(bx,by);ctx.lineTo(bx,lowY);ctx.stroke();ctx.setLineDash([]);
+    ctx.fillStyle=BLUE;ctx.font='10px ui-monospace';ctx.textAlign='left';ctx.fillText('h',bx+14,(by+lowY)/2);
+    ctx.strokeStyle=INK;ctx.lineWidth=2;ctx.beginPath();ctx.moveTo(PV.x,PV.y);ctx.lineTo(bx,by);ctx.stroke();
+    ballDraw(bx,by,13);
+    const vt=Lp*pom*46;if(Math.abs(vt)>4)vArrow(bx,by,Math.cos(pth)*vt,-Math.sin(pth)*vt,RED);
+    msg='Pendule : au point haut, tout est potentiel (v=0) ; au point bas, tout est cinétique (v max). '+(fric?'Le frottement réduit l\'amplitude à chaque passage.':'Sans frottement, il revient à la même hauteur.');
+  }
+
+  drawBar(U,K,E0);
+  info.innerHTML='<b style="color:'+BLUE+'">U='+U.toFixed(2)+'</b> + <b style="color:'+RED+'">K='+K.toFixed(2)+'</b> = '+
+    (fric?'<b style="color:'+ORANGE+'">E='+(U+K).toFixed(2)+'</b> (diminue : frottement)':'<b style="color:'+GREEN+'">E='+E0.toFixed(2)+'</b> (constante)')+'  —  '+msg;
+  requestAnimationFrame(draw);}
+reset();draw();
+</script>
