@@ -68,13 +68,17 @@ a{color:inherit}
 @media (max-width:520px){.row,div:has(>input[type=range]){flex-wrap:wrap!important}
   .row>.pill:first-child,div:has(>input[type=range])>.pill:first-child{min-width:0!important;flex:1 1 100%}
   input[type=range]{min-width:0!important}.val{min-width:0!important}}
-.val{background:none!important;border:0!important;border-radius:0!important;padding:0!important;font:600 .9rem var(--f-num)!important;font-variant-numeric:tabular-nums;text-align:right;color:var(--ink)}
-.btn{background:var(--paper)!important;border:1px solid var(--line2)!important;border-radius:7px!important;color:var(--ink2)!important;
-  font:700 .82rem var(--f-ui)!important;padding:7px 13px!important;transition:background .15s,border-color .15s;cursor:pointer}
+.val{background:none!important;border:0!important;border-radius:0!important;padding:0!important;font:800 .92rem var(--f-ui)!important;font-variant-numeric:tabular-nums;text-align:right;color:var(--ink);white-space:nowrap}
+.btn{background:var(--paper)!important;border:1px solid var(--line2)!important;border-radius:8px!important;color:var(--ink)!important;
+  font:800 .82rem var(--f-ui)!important;letter-spacing:.005em;padding:8px 14px!important;transition:background .15s,border-color .15s;cursor:pointer}
+.btn:active{transform:translateY(1px)}
 .btn:hover{background:var(--press)!important;border-color:var(--faint)!important}
 .btn.on{background:var(--navy)!important;border-color:var(--navy)!important;color:#fff!important;box-shadow:none}
-.fml{background:var(--sel)!important;border:0!important;border-radius:10px!important;font:400 1.06rem/1.7 var(--f-math)!important;color:var(--ink);padding:10px 14px!important;margin:12px 0!important}
-.info{background:var(--bg)!important;border:1px solid var(--line)!important;border-radius:10px!important;font:500 .84rem/1.8 var(--f-num)!important;color:var(--muted)!important;padding:9px 14px!important}
+.fml{background:var(--sel)!important;border:0!important;border-left:4px solid var(--navy)!important;border-radius:10px!important;font:600 1rem/1.75 var(--f-ui)!important;color:var(--ink);padding:12px 16px!important;margin:12px 0!important}
+.fml b,.fml strong{font-weight:800}
+.fml sub,.fml sup,.info sub,.info sup{font-size:.72em}
+.info{background:var(--bg)!important;border:1px solid var(--line)!important;border-radius:10px!important;font:600 .86rem/1.8 var(--f-ui)!important;font-variant-numeric:tabular-nums;color:var(--muted)!important;padding:10px 14px!important}
+.info b,.info strong{font-weight:800}
 select{font:600 .86rem var(--f-ui)!important;border:1px solid var(--line2)!important;border-radius:7px!important;background:var(--paper)!important;color:var(--ink)!important;padding:6px 8px!important}
 input[type=range]{-webkit-appearance:none;appearance:none;height:24px;background:linear-gradient(var(--line),var(--line)) center/100% 4px no-repeat;cursor:pointer;--pc:var(--blue)}
 input[type=range]::-webkit-slider-runnable-track{height:4px;background:transparent;border-radius:2px}
@@ -92,7 +96,7 @@ button:focus-visible,input:focus-visible,a:focus-visible{outline:2px solid var(-
 .sfa-list a{display:grid;grid-template-columns:22px 1fr;gap:8px;align-items:baseline;padding:7px 8px;border-radius:8px;text-decoration:none;font:600 13px/1.35 var(--f-ui);color:var(--ink2)}
 .sfa-list a:hover{background:var(--press)}
 .sfa-list a.on{background:var(--sel);color:var(--chip-ink)}
-.sfa-list a i{font:600 11px var(--f-num);font-style:normal;color:var(--faint)}
+.sfa-list a i{font:800 11px var(--f-ui);font-style:normal;color:var(--faint)}
 .sfa-promo{background:var(--navy);color:#fff;border-radius:12px;padding:16px}
 .sfa-promo small{display:block;font:800 10px var(--f-ui);letter-spacing:.12em;text-transform:uppercase;color:var(--yellow);margin-bottom:6px}
 .sfa-promo b{display:block;font:800 16px/1.3 var(--f-ui);margin-bottom:12px}
@@ -132,8 +136,8 @@ new MutationObserver(ms=>ms.forEach(m=>{if(m.target.classList&&m.target.classLis
 </script>
 <header class="sfa-top"><div class="in">
   <a class="sfa-logo" href="https://sfascienceforall-cell.github.io/simulations/"><i>SFA</i>Science For All</a>
-  <nav class="sfa-nav"><a class="on" href="https://sfascienceforall-cell.github.io/simulations/">Simulations</a><a href="#">Prépa médecine</a></nav>
-  <a class="sfa-cta" href="#">Découvrir la prépa</a></div></header>
+  <nav class="sfa-nav"><a class="on" href="https://sfascienceforall-cell.github.io/simulations/">Simulations</a><a href="https://sfascienceforall-cell.github.io/simulations/#EX">Exercices</a><a href="https://sfascienceforall-cell.github.io/simulations/prepa/">Prépa médecine</a></nav>
+  <a class="sfa-cta" href="https://sfascienceforall-cell.github.io/simulations/prepa/">Découvrir la prépa</a></div></header>
 <div class="sfa-page">
 <nav class="sfa-crumbs" aria-label="Fil d'Ariane"><a href="https://sfascienceforall-cell.github.io/simulations/">Simulations</a>›<a href="https://sfascienceforall-cell.github.io/simulations/#PH4">PH4 · Travail et énergie</a>›<b>Énergie : exemples</b></nav>
 <div class="sfa-grid"><main style="min-width:0">
@@ -160,7 +164,8 @@ new MutationObserver(ms=>ms.forEach(m=>{if(m.target.classList&&m.target.classLis
 
 <script>
 const cv=document.getElementById('cv'),ctx=cv.getContext('2d');
-const RED='#E24B4A',BLUE='#378ADD',GREEN='#1D9E75',ORANGE='#D85A30',INK='#3d3d3a',GREY='#9aa0a6',AX='#c8ccd0';
+const RED='#E24B4A',BLUE='#378ADD',GREEN='#1D9E75',ORANGE='#BA7517',INK='#13233a',GREY='#8a95a3',AX='#d3d9e2';
+const FNT=(w,s)=>w+' '+s+'px Mulish,system-ui,sans-serif';
 let W=0,H=0,dpr=1,sc=0,paused=false,fric=false;
 const gB=7.0, gN=2.7, kS=12, gP=5.5, Lp=1;
 let yb=1,vyb=0,hpeak=1;            // balle
@@ -175,48 +180,86 @@ function syncSize(){const r=cv.getBoundingClientRect();dpr=window.devicePixelRat
 function hV(x){return 0.5*(1+Math.cos(2*Math.PI*x));}
 function hpV(x){return -Math.PI*Math.sin(2*Math.PI*x);}
 
+// --- utilitaires de dessin (charte SFA) ---
+function halo(txt,x,y,col,font,align){ctx.font=font;ctx.textAlign=align||'center';ctx.textBaseline='middle';ctx.lineJoin='round';
+  ctx.strokeStyle='rgba(255,255,255,0.95)';ctx.lineWidth=4.5;ctx.strokeText(txt,x,y);ctx.fillStyle=col;ctx.fillText(txt,x,y);ctx.textBaseline='alphabetic';}
+function card(x,y,w,h){ctx.save();ctx.shadowColor='rgba(19,35,58,0.07)';ctx.shadowBlur=10;ctx.shadowOffsetY=2;ctx.fillStyle='#fff';ctx.beginPath();ctx.roundRect(x,y,w,h,8);ctx.fill();ctx.restore();
+  ctx.strokeStyle='#e3e7ed';ctx.lineWidth=1;ctx.beginPath();ctx.roundRect(x+.5,y+.5,w-1,h-1,8);ctx.stroke();}
+function hatch(x1,y1,x2,y2,dx,dy){ctx.strokeStyle='#c3cbd6';ctx.lineWidth=1.2;ctx.lineCap='round';const n=Math.hypot(x2-x1,y2-y1),k=Math.floor(n/9);
+  for(let i=0;i<=k;i++){const t=i/k,x=x1+(x2-x1)*t,y=y1+(y2-y1)*t;ctx.beginPath();ctx.moveTo(x,y);ctx.lineTo(x+dx,y+dy);ctx.stroke();}}
+function support(x1,y1,x2,y2,dx,dy){hatch(x1,y1,x2,y2,dx,dy);ctx.strokeStyle=INK;ctx.lineWidth=3;ctx.lineCap='round';ctx.beginPath();ctx.moveTo(x1,y1);ctx.lineTo(x2,y2);ctx.stroke();}
+function cote(x,y1,y2,lab,side){ // cote verticale (hauteur h)
+  if(Math.abs(y2-y1)<6)return;ctx.strokeStyle=BLUE;ctx.lineWidth=1.5;ctx.lineCap='round';ctx.setLineDash([4,4]);
+  ctx.beginPath();ctx.moveTo(x,y1);ctx.lineTo(x,y2);ctx.stroke();ctx.setLineDash([]);
+  [y1,y2].forEach(y=>{ctx.beginPath();ctx.moveTo(x-5,y);ctx.lineTo(x+5,y);ctx.stroke();});
+  if(Math.abs(y2-y1)>18){ctx.font=FNT(800,13);const w=ctx.measureText(lab).width;halo(lab,x+side*(w/2+9),(y1+y2)/2,'#185fa5',FNT(800,13));}}
+function ballDraw(x,y,r){ctx.save();ctx.shadowColor='rgba(19,35,58,0.22)';ctx.shadowBlur=8;ctx.shadowOffsetY=2;
+  const g=ctx.createRadialGradient(x-r*0.35,y-r*0.4,r*0.15,x,y,r);g.addColorStop(0,'#fbd9a8');g.addColorStop(0.55,'#e39a3b');g.addColorStop(1,ORANGE);
+  ctx.fillStyle=g;ctx.beginPath();ctx.arc(x,y,r,0,7);ctx.fill();ctx.restore();
+  ctx.strokeStyle='#8a560f';ctx.lineWidth=1.5;ctx.beginPath();ctx.arc(x,y,r,0,7);ctx.stroke();
+  ctx.fillStyle='rgba(255,255,255,0.7)';ctx.beginPath();ctx.ellipse(x-r*0.38,y-r*0.42,r*0.26,r*0.16,-0.6,0,7);ctx.fill();}
+function vArrow(x,y,vx,vy,col,lab){const len=Math.hypot(vx,vy);if(len<6)return;const ex=x+vx,ey=y+vy,a=Math.atan2(vy,vx),hs=Math.min(12,len*0.6);
+  ctx.strokeStyle=col;ctx.lineWidth=3;ctx.lineCap='round';ctx.beginPath();ctx.moveTo(x,y);ctx.lineTo(ex-Math.cos(a)*hs*0.8,ey-Math.sin(a)*hs*0.8);ctx.stroke();
+  ctx.fillStyle=col;ctx.save();ctx.translate(ex,ey);ctx.rotate(a);ctx.beginPath();ctx.moveTo(0,0);ctx.lineTo(-hs,-hs*0.5);ctx.lineTo(-hs*0.82,0);ctx.lineTo(-hs,hs*0.5);ctx.closePath();ctx.fill();ctx.restore();
+  if(lab&&len>18)halo(lab,ex+Math.cos(a)*12-Math.sin(a)*0,ey+Math.sin(a)*12+(Math.abs(Math.sin(a))<0.5?-12:0),'#a32d2d',FNT(800,13));}
+
+// jauge d'énergie : encadré à droite, barre arrondie empilée U (bleu) + K (rouge) + part dissipée (orange)
 function drawBar(U,K,E0){
-  const gx=W*0.80,gw=W*0.11,gb=H*0.82,gt=H*0.10,gmax=gb-gt,s=gmax/(E0*1.03);
-  const E=U+K,dH=Math.max(0,(E0-E))*s,uH=U*s,kH=K*s;
-  ctx.strokeStyle='#e0e0e0';ctx.lineWidth=1.5;ctx.strokeRect(gx,gt,gw,gmax);
-  ctx.save();ctx.beginPath();ctx.rect(gx,gt,gw,gmax);ctx.clip(); // la barre ne sort jamais de son cadre
-  ctx.fillStyle=BLUE;ctx.fillRect(gx+2,gb-uH,gw-4,uH);
-  ctx.fillStyle=RED;ctx.fillRect(gx+2,gb-uH-kH,gw-4,kH);
-  if(dH>1){ctx.fillStyle='rgba(216,90,48,0.35)';ctx.fillRect(gx+2,gb-uH-kH-dH,gw-4,dH);}
+  const pw=PW,px=W-pw-12,py=12,ph=H-24;card(px,py,pw,ph);
+  const narrow=pw<130;
+  ctx.font=FNT(800,13);ctx.fillStyle=INK;ctx.textAlign='center';ctx.textBaseline='middle';ctx.fillText('Énergie',px+pw/2,py+20);ctx.textBaseline='alphabetic';
+  const legH=fric?66:46,gw=Math.min(54,pw*0.42),gx=px+pw/2-gw/2+(narrow?6:0),gt=py+48,gb=py+ph-legH-14,gmax=gb-gt,s=gmax/(E0*1.03);
+  const E=U+K,dH=Math.max(0,(E0-E))*s,uH=Math.min(U*s,gmax),kH=Math.min(K*s,gmax-uH);
+  ctx.fillStyle='#f3f5f8';ctx.beginPath();ctx.roundRect(gx,gt,gw,gmax,8);ctx.fill();
+  ctx.save();ctx.beginPath();ctx.roundRect(gx,gt,gw,gmax,8);ctx.clip(); // la barre ne sort jamais de son cadre
+  const lg=(c1,c2,y0,y1)=>{const g=ctx.createLinearGradient(gx,0,gx+gw,0);g.addColorStop(0,c1);g.addColorStop(1,c2);return g;};
+  ctx.fillStyle=lg('#5aa0e6',BLUE);ctx.fillRect(gx,gb-uH,gw,uH);
+  ctx.fillStyle=lg('#ec6e6d',RED);ctx.fillRect(gx,gb-uH-kH,gw,kH);
+  if(fric&&dH>1){const y0=gb-uH-kH-dH;ctx.fillStyle='rgba(186,117,23,0.16)';ctx.fillRect(gx,y0,gw,dH);
+    ctx.save();ctx.beginPath();ctx.rect(gx,y0,gw,dH);ctx.clip();ctx.strokeStyle='rgba(186,117,23,0.55)';ctx.lineWidth=1.5;
+    for(let t=-gw;t<dH+gw;t+=7){ctx.beginPath();ctx.moveTo(gx,y0+t);ctx.lineTo(gx+gw,y0+t-gw);ctx.stroke();}ctx.restore();}
+  ctx.strokeStyle='rgba(255,255,255,0.9)';ctx.lineWidth=1.5;if(uH>2&&kH>2){ctx.beginPath();ctx.moveTo(gx,gb-uH);ctx.lineTo(gx+gw,gb-uH);ctx.stroke();}
   ctx.restore();
-  ctx.strokeStyle=GREEN;ctx.setLineDash([4,3]);ctx.beginPath();ctx.moveTo(gx-6,gb-E0*s);ctx.lineTo(gx+gw+6,gb-E0*s);ctx.stroke();ctx.setLineDash([]);
-  ctx.fillStyle=GREEN;ctx.font='600 11px Mulish,system-ui,sans-serif';ctx.textAlign='right';ctx.fillText('E₀',gx-9,gb-E0*s+4);ctx.textAlign='center'; // à gauche de la barre : plus collé au cadre
-  ctx.font='600 12px Mulish,system-ui,sans-serif';
-  if(uH>16){ctx.fillStyle='#fff';ctx.fillText('U',gx+gw/2,gb-uH/2+4);}
-  if(kH>16){ctx.fillStyle='#fff';ctx.fillText('K',gx+gw/2,Math.max(gt+14,gb-uH-Math.min(kH,gmax-uH)/2+4));}
-  ctx.fillStyle=GREY;ctx.font='11px Mulish,system-ui,sans-serif';ctx.fillText('énergie',gx+gw/2,gb+16);
+  ctx.strokeStyle='#e3e7ed';ctx.lineWidth=1;ctx.beginPath();ctx.roundRect(gx+.5,gt+.5,gw-1,gmax-1,8);ctx.stroke();
+  // niveau E₀
+  const ye=gb-E0*s;ctx.strokeStyle=GREEN;ctx.lineWidth=1.8;ctx.setLineDash([5,4]);ctx.beginPath();ctx.moveTo(gx-8,ye);ctx.lineTo(gx+gw+8,ye);ctx.stroke();ctx.setLineDash([]);
+  halo('E₀',gx-12,ye,'#0F6E56',FNT(800,13),'right');
+  if(kH>20){ctx.font=FNT(800,14);ctx.fillStyle='#fff';ctx.textAlign='center';ctx.textBaseline='middle';ctx.fillText('K',gx+gw/2,gb-uH-kH/2);ctx.textBaseline='alphabetic';}
+  if(uH>20){ctx.font=FNT(800,14);ctx.fillStyle='#fff';ctx.textAlign='center';ctx.textBaseline='middle';ctx.fillText('U',gx+gw/2,gb-uH/2);ctx.textBaseline='alphabetic';}
+  // légende
+  const items=[[BLUE,narrow?'U potentielle':'U  potentielle'],[RED,narrow?'K cinétique':'K  cinétique']];if(fric)items.push([ORANGE,narrow?'dissipée':'dissipée (frott.)']);
+  ctx.font=FNT(700,12);ctx.textAlign='left';ctx.textBaseline='middle';
+  items.forEach((it,i)=>{const yy=gb+22+i*20,xx=px+12;ctx.fillStyle=it[0];ctx.beginPath();ctx.roundRect(xx,yy-5,10,10,3);ctx.fill();ctx.fillStyle='#2c3a4e';ctx.fillText(it[1],xx+16,yy);});
+  ctx.textBaseline='alphabetic';
 }
-function ballDraw(x,y,r){ctx.beginPath();ctx.arc(x,y,r,0,7);ctx.fillStyle='#fdece4';ctx.fill();ctx.strokeStyle=ORANGE;ctx.lineWidth=2.5;ctx.stroke();
-  ctx.beginPath();ctx.moveTo(x-r,y);ctx.lineTo(x+r,y);ctx.moveTo(x,y-r);ctx.lineTo(x,y+r);ctx.strokeStyle='rgba(216,90,48,0.5)';ctx.lineWidth=1;ctx.stroke();}
-function vArrow(x,y,vx,vy,col){const len=Math.hypot(vx,vy);if(len<4)return;const ex=x+vx,ey=y+vy;
-  ctx.strokeStyle=col;ctx.lineWidth=2.4;ctx.lineCap='round';ctx.beginPath();ctx.moveTo(x,y);ctx.lineTo(ex,ey);ctx.stroke();
-  const a=Math.atan2(vy,vx);ctx.fillStyle=col;ctx.save();ctx.translate(ex,ey);ctx.rotate(a);ctx.beginPath();ctx.moveTo(7,0);ctx.lineTo(-4,-4);ctx.lineTo(-4,4);ctx.closePath();ctx.fill();ctx.restore();}
+let PW=150;
 
 function draw(){syncSize();ctx.clearRect(0,0,W,H);ctx.fillStyle='#fff';ctx.fillRect(0,0,W,H);
   const info=document.getElementById('info');let U=0,K=0,E0=1,msg='';
+  PW=Math.round(Math.max(118,Math.min(170,W*0.2)));
+  const SW=W-PW-24;   // largeur utile de la scène (à gauche de la jauge)
+  ctx.lineCap='round';ctx.lineJoin='round';
 
   if(sc===0){ // BALLE
     const dtb=0.016;
     if(!paused){vyb-=gB*dtb;yb+=vyb*dtb;
       if(yb<0){yb=0;hpeak=(fric?0.82*0.82:1)*hpeak;if(hpeak<0.012){hpeak=0;vyb=0;}else vyb=Math.sqrt(2*gB*hpeak);}}
     U=gB*yb;K=0.5*vyb*vyb;E0=gB*1.0;
-    const mx=W*0.34,floor=H*0.82,top=H*0.12,hpx=(floor-top);
-    ctx.strokeStyle=INK;ctx.lineWidth=2.5;ctx.beginPath();ctx.moveTo(mx-80,floor);ctx.lineTo(mx+80,floor);ctx.stroke();
-    ctx.strokeStyle='#bbb';ctx.lineWidth=1;for(let h=mx-76;h<mx+80;h+=14){ctx.beginPath();ctx.moveTo(h,floor);ctx.lineTo(h-8,floor+9);ctx.stroke();}
+    const R=Math.max(13,Math.min(20,H*0.035)),mx=SW*0.5,floor=H*0.84,top=H*0.10+2*R,hpx=(floor-top);
+    const fw=Math.min(SW*0.42,130);
+    // sol + ombre portée qui rétrécit avec la hauteur
+    ctx.fillStyle='rgba(19,35,58,'+(0.16-0.1*yb).toFixed(3)+')';ctx.beginPath();ctx.ellipse(mx,floor+1,R*(1.2-0.5*yb),R*0.28*(1.2-0.5*yb),0,0,7);ctx.fill();
+    support(mx-fw,floor+2,mx+fw,floor+2,-7,9);
+    // repère de la hauteur de lâcher
+    ctx.strokeStyle='rgba(29,158,117,0.45)';ctx.lineWidth=1.5;ctx.setLineDash([5,5]);ctx.beginPath();ctx.moveTo(mx-fw,top-R);ctx.lineTo(mx+fw,top-R);ctx.stroke();ctx.setLineDash([]);
     const by=floor-yb*hpx;
-    ctx.strokeStyle=BLUE;ctx.setLineDash([3,3]);ctx.lineWidth=1.3;ctx.beginPath();ctx.moveTo(mx,by);ctx.lineTo(mx,floor);ctx.stroke();ctx.setLineDash([]);
-    ctx.fillStyle=BLUE;ctx.font='11px JetBrains Mono,ui-monospace,monospace';ctx.textAlign='right';ctx.fillText('h='+yb.toFixed(2),mx-18,Math.min((by+floor)/2,floor-6)); // côté gauche : ni sur la flèche, ni sous le sol
-    ballDraw(mx,by-14,14);
-    if(Math.abs(vyb)>0.3)vArrow(mx+26,by-14,0,-vyb*11,RED);
+    cote(mx-R-14,by,floor,'h = '+yb.toFixed(2),-1);
+    ballDraw(mx,by-R,R);
+    if(Math.abs(vyb)>0.3)vArrow(mx+R+16,by-R,0,-vyb*11*(hpx/300),RED,'v');
     msg='Balle lâchée d\'une hauteur h : en haut tout est potentiel (v=0), au sol tout est cinétique (v max). '+(fric?'Avec pertes, elle rebondit de moins en moins haut et finit à l\'arrêt (E → 0, tout dissipé).':'Sans perte, elle remonte toujours à la même hauteur.');
   }
   else if(sc===1){ // VOITURE
-    const mx=W*0.06,tw=W*0.66,baseY=H*0.82,hpx=H*0.60,SX=x=>mx+x*tw,SY=h=>baseY-h*hpx,dtc=0.018;
+    const mx=14,tw=SW-14,baseY=H*0.84,hpx=H*0.62,SX=x=>mx+x*tw,SY=h=>baseY-h*hpx,dtc=0.018;
     if(!paused){for(let it=0;it<3;it++){const hp=hpV(cx),den=Math.sqrt(1+hp*hp);
       cvel+=(-gN*hp/den)*dtc;
       if(fric)cvel-=0.9*cvel*dtc;
@@ -225,43 +268,58 @@ function draw(){syncSize();ctx.clearRect(0,0,W,H);ctx.fillStyle='#fff';ctx.fillR
       // sans frottement : la vitesse est recalée sur l'énergie de départ (½v² = E₀ − g·h), l'intégration ne dérive plus
       if(!fric){const sp=Math.sqrt(Math.max(0,2*(cE0-gN*hV(cx))));cvel=(cvel>=0?1:-1)*sp;}}}
     U=gN*hV(cx);K=0.5*cvel*cvel;E0=cE0;
-    ctx.strokeStyle=INK;ctx.lineWidth=3;ctx.beginPath();for(let x=0;x<=1;x+=0.004){const p=SY(hV(x));x===0?ctx.moveTo(SX(x),p):ctx.lineTo(SX(x),p);}ctx.stroke();
-    ctx.strokeStyle='rgba(29,158,117,0.5)';ctx.setLineDash([5,4]);ctx.beginPath();ctx.moveTo(mx,SY(cE0/gN));ctx.lineTo(mx+tw,SY(cE0/gN));ctx.stroke();ctx.setLineDash([]);
-    ctx.fillStyle=GREEN;ctx.font='11px Mulish,system-ui,sans-serif';ctx.textAlign='left';ctx.fillText('niveau de lâcher',mx+4,SY(cE0/gN)-5);
+    // relief : colline pleine en dégradé, piste en trait épais
+    ctx.beginPath();for(let x=0;x<=1.0001;x+=0.004){const p=SY(hV(x));x===0?ctx.moveTo(SX(x),p):ctx.lineTo(SX(x),p);}
+    ctx.lineTo(SX(1),H-10);ctx.lineTo(SX(0),H-10);ctx.closePath();
+    const gg=ctx.createLinearGradient(0,SY(1),0,H);gg.addColorStop(0,'#eef1f5');gg.addColorStop(1,'#f8f9fb');ctx.fillStyle=gg;ctx.fill();
+    ctx.strokeStyle=INK;ctx.lineWidth=3.5;ctx.beginPath();for(let x=0;x<=1.0001;x+=0.004){const p=SY(hV(x));x===0?ctx.moveTo(SX(x),p):ctx.lineTo(SX(x),p);}ctx.stroke();
+    ctx.strokeStyle='rgba(29,158,117,0.6)';ctx.lineWidth=1.8;ctx.setLineDash([6,5]);ctx.beginPath();ctx.moveTo(mx,SY(cE0/gN));ctx.lineTo(mx+tw,SY(cE0/gN));ctx.stroke();ctx.setLineDash([]);
+    halo(W<500?'lâcher':'niveau de lâcher',SX(0.5),SY(cE0/gN)-12,'#0F6E56',FNT(800,W<500?12:13));
     // voiture posée sur la piste, orientée selon la pente
-    const carX=SX(cx),carY=SY(hV(cx)),slope=Math.atan2(-hpV(cx)*hpx*0.004,tw*0.004);
-    ctx.save();ctx.translate(carX,carY);ctx.rotate(slope);
-    ctx.fillStyle='#eef4fb';ctx.strokeStyle=BLUE;ctx.lineWidth=2;ctx.beginPath();ctx.roundRect(-17,-19,34,15,4);ctx.fill();ctx.stroke();
-    ctx.beginPath();ctx.roundRect(-9,-27,17,9,3);ctx.fill();ctx.stroke();
-    ctx.fillStyle=INK;ctx.beginPath();ctx.arc(-9,-4,4.5,0,7);ctx.arc(9,-4,4.5,0,7);ctx.fill();
+    const carX=SX(cx),carY=SY(hV(cx)),slope=Math.atan2(-hpV(cx)*hpx,tw),k=W<500?0.8:Math.max(1,Math.min(1.5,W/700));
+    ctx.save();ctx.translate(carX,carY);ctx.rotate(slope);ctx.scale(k,k);
+    ctx.save();ctx.shadowColor='rgba(19,35,58,0.25)';ctx.shadowBlur=6;ctx.shadowOffsetY=2;
+    const cg=ctx.createLinearGradient(0,-26,0,-6);cg.addColorStop(0,'#6fb0ee');cg.addColorStop(1,'#185fa5');ctx.fillStyle=cg;
+    ctx.beginPath();ctx.moveTo(-20,-8);ctx.lineTo(-20,-16);ctx.quadraticCurveTo(-19,-19,-15,-19);ctx.lineTo(-9,-19);ctx.lineTo(-4,-27);ctx.lineTo(8,-27);ctx.lineTo(13,-19);ctx.lineTo(17,-19);ctx.quadraticCurveTo(21,-18,21,-14);ctx.lineTo(21,-8);ctx.closePath();ctx.fill();ctx.restore();
+    ctx.strokeStyle='#13233a';ctx.lineWidth=1.2;ctx.stroke();
+    ctx.fillStyle='#e6f1fc';ctx.beginPath();ctx.moveTo(-6,-19);ctx.lineTo(-3,-24.5);ctx.lineTo(7,-24.5);ctx.lineTo(10.5,-19);ctx.closePath();ctx.fill();
+    [-11,12].forEach(wx=>{ctx.fillStyle='#13233a';ctx.beginPath();ctx.arc(wx,-6,6,0,7);ctx.fill();ctx.fillStyle='#c3cbd6';ctx.beginPath();ctx.arc(wx,-6,2.4,0,7);ctx.fill();});
     ctx.restore();
     msg='Voiture (frein relâché) sur une piste : elle accélère en descendant (U→K) puis ralentit en montant (K→U). '+(fric?'Avec frottement, elle s\'arrête peu à peu au creux.':'Sans frottement, elle remonte à la même hauteur, indéfiniment.');
   }
   else if(sc===2){ // RESSORT
     const dt=0.02;if(!paused){const a=-(kS)*sx-(fric?1.3:0)*sv;sv+=a*dt;sx+=sv*dt;}
     U=0.5*kS*sx*sx;K=0.5*sv*sv;E0=0.5*kS*1;
-    const cyy=H*0.5,wallX=W*0.10,eqX=W*0.42,amp=W*0.20,mxp=eqX+sx*amp;
-    ctx.strokeStyle=INK;ctx.lineWidth=3;ctx.beginPath();ctx.moveTo(wallX,cyy-40);ctx.lineTo(wallX,cyy+40);ctx.stroke();
-    ctx.strokeStyle='#bbb';ctx.lineWidth=1;for(let hy=cyy-38;hy<cyy+40;hy+=10){ctx.beginPath();ctx.moveTo(wallX,hy);ctx.lineTo(wallX-8,hy+8);ctx.stroke();}
-    ctx.strokeStyle='#7f8790';ctx.lineWidth=2;ctx.beginPath();ctx.moveTo(wallX,cyy);const n=14;for(let i=0;i<=n;i++){const t=i/n,px=wallX+(mxp-24-wallX)*t,py=cyy+(i%2?10:-10)*(i>0&&i<n?1:0);ctx.lineTo(px,py);}ctx.lineTo(mxp-24,cyy);ctx.stroke();
-    ctx.strokeStyle='rgba(0,0,0,0.2)';ctx.setLineDash([3,4]);ctx.beginPath();ctx.moveTo(eqX,cyy-46);ctx.lineTo(eqX,cyy+46);ctx.stroke();ctx.setLineDash([]);
-    ctx.fillStyle=GREY;ctx.font='10px Mulish,system-ui,sans-serif';ctx.textAlign='center';ctx.fillText('équilibre',eqX,cyy+60);
-    ctx.fillStyle='#eef4fb';ctx.strokeStyle=BLUE;ctx.lineWidth=2.5;ctx.beginPath();ctx.roundRect(mxp-24,cyy-22,48,44,6);ctx.fill();ctx.stroke();
-    if(Math.abs(sv)>0.3)vArrow(mxp,cyy-34,sv*11,0,RED);
+    const B=Math.max(40,Math.min(64,SW*0.13)),cyy=H*0.52,wallX=Math.max(22,SW*0.05),amp=Math.min(SW*0.24,(SW-wallX-B/2-12)/2.2),eqX=Math.max(wallX+amp+B*1.1,SW*0.52),mxp=eqX+sx*amp;
+    const floorY=cyy+B/2+1;
+    support(wallX,cyy-B*1.1,wallX,floorY,-8,7);
+    support(wallX,floorY,Math.min(SW,eqX+amp+B),floorY,-7,8);
+    // ressort : spires régulières
+    const x0=wallX,x1=mxp-B/2,n=12,amp2=Math.min(12,B*0.24);ctx.strokeStyle='#5f6b7a';ctx.lineWidth=2.5;ctx.beginPath();ctx.moveTo(x0,cyy);ctx.lineTo(x0+8,cyy);
+    for(let i=0;i<=n;i++){const t=i/n,px=x0+8+(x1-x0-16)*t,py=cyy+(i===0||i===n?0:(i%2?amp2:-amp2));ctx.lineTo(px,py);}ctx.lineTo(x1,cyy);ctx.stroke();
+    ctx.strokeStyle='rgba(19,35,58,0.3)';ctx.lineWidth=1.5;ctx.setLineDash([4,5]);ctx.beginPath();ctx.moveTo(eqX,cyy-B*0.9);ctx.lineTo(eqX,floorY+22);ctx.stroke();ctx.setLineDash([]);
+    halo('équilibre',eqX,floorY+32,'#5f6b7a',FNT(700,12));
+    ctx.save();ctx.shadowColor='rgba(19,35,58,0.2)';ctx.shadowBlur=8;ctx.shadowOffsetY=3;
+    const bg=ctx.createLinearGradient(0,cyy-B/2,0,cyy+B/2);bg.addColorStop(0,'#eaf3fc');bg.addColorStop(1,'#c9def4');ctx.fillStyle=bg;
+    ctx.beginPath();ctx.roundRect(mxp-B/2,cyy-B/2,B,B,7);ctx.fill();ctx.restore();
+    ctx.strokeStyle='#185fa5';ctx.lineWidth=2;ctx.beginPath();ctx.roundRect(mxp-B/2,cyy-B/2,B,B,7);ctx.stroke();
+    ctx.fillStyle='#185fa5';ctx.font=FNT(800,15);ctx.textAlign='center';ctx.textBaseline='middle';ctx.fillText('m',mxp,cyy);ctx.textBaseline='alphabetic';
+    if(Math.abs(sv)>0.3)vArrow(mxp,cyy-B/2-16,sv*11*(amp/140),0,RED,'v');
     msg='Masse sur ressort : à l\'écart max, tout est potentiel élastique U=½k·x² (v=0) ; au passage à l\'équilibre, tout est cinétique. '+(fric?'Le frottement amortit les oscillations.':'Sans frottement, l\'amplitude reste constante.');
   }
   else { // PENDULE
     const dt=0.02;if(!paused){const a=-(gP/Lp)*Math.sin(pth)-(fric?0.4:0)*pom;pom+=a*dt;pth+=pom*dt;}
     U=gP*Lp*(1-Math.cos(pth));K=0.5*(Lp*pom)*(Lp*pom);E0=pE0;
-    const PV={x:W*0.40,y:H*0.14},Lpx=Math.min(H*0.44,(PV.x-18)/Math.sin(0.9)),bx=PV.x+Lpx*Math.sin(pth),by=PV.y+Lpx*Math.cos(pth),lowY=PV.y+Lpx;
-    ctx.strokeStyle=INK;ctx.lineWidth=3;ctx.beginPath();ctx.moveTo(PV.x-50,PV.y);ctx.lineTo(PV.x+50,PV.y);ctx.stroke();
-    ctx.strokeStyle='#bbb';ctx.lineWidth=1;for(let h=PV.x-44;h<PV.x+50;h+=10){ctx.beginPath();ctx.moveTo(h,PV.y);ctx.lineTo(h-7,PV.y-7);ctx.stroke();}
-    ctx.strokeStyle='rgba(0,0,0,0.15)';ctx.setLineDash([4,5]);ctx.beginPath();ctx.moveTo(PV.x-70,lowY);ctx.lineTo(Math.min(bx+70,W*0.78),lowY);ctx.stroke();ctx.setLineDash([]);
-    ctx.strokeStyle=BLUE;ctx.setLineDash([3,3]);ctx.lineWidth=1.2;ctx.beginPath();ctx.moveTo(bx,by);ctx.lineTo(bx,lowY);ctx.stroke();ctx.setLineDash([]);
-    ctx.fillStyle=BLUE;ctx.font='10px JetBrains Mono,ui-monospace,monospace';ctx.textAlign=pth>=0?'left':'right';ctx.fillText('h',bx+(pth>=0?18:-18),Math.max((by+lowY)/2+4,by+24)); // à l'écart de la boule et de la flèche
-    ctx.strokeStyle=INK;ctx.lineWidth=2;ctx.beginPath();ctx.moveTo(PV.x,PV.y);ctx.lineTo(bx,by);ctx.stroke();
-    ballDraw(bx,by,13);
-    const vt=Lp*pom*46;if(Math.abs(vt)>4)vArrow(bx,by,Math.cos(pth)*vt,-Math.sin(pth)*vt,RED);
+    const R=Math.max(12,Math.min(18,H*0.03)),Lpx=Math.min(H*0.66,(SW*0.5-R-10)/Math.sin(0.9)),PV={x:SW*0.5+6,y:Math.max(H*0.12,(H-Lpx-R)/2-10)},bx=PV.x+Lpx*Math.sin(pth),by=PV.y+Lpx*Math.cos(pth),lowY=PV.y+Lpx;
+    support(PV.x-46,PV.y,PV.x+46,PV.y,-7,-8);
+    // position basse de référence (h = 0) et trajectoire
+    ctx.strokeStyle='#e3e7ed';ctx.lineWidth=1.5;ctx.setLineDash([3,5]);ctx.beginPath();ctx.arc(PV.x,PV.y,Lpx,Math.PI/2-0.95,Math.PI/2+0.95);ctx.stroke();
+    ctx.strokeStyle='rgba(19,35,58,0.22)';ctx.beginPath();ctx.moveTo(PV.x-Lpx*Math.sin(0.9)-6,lowY+R);ctx.lineTo(PV.x+Lpx*Math.sin(0.9)+6,lowY+R);ctx.stroke();ctx.setLineDash([]);
+    ctx.strokeStyle='#5f6b7a';ctx.lineWidth=2;ctx.beginPath();ctx.moveTo(PV.x,PV.y);ctx.lineTo(bx,by);ctx.stroke();
+    ctx.fillStyle='#fff';ctx.strokeStyle=INK;ctx.lineWidth=2.5;ctx.beginPath();ctx.arc(PV.x,PV.y,4,0,7);ctx.fill();ctx.stroke();
+    const sd=pth>=0?-1:1;cote(bx+sd*(R+12),by+R,lowY+R,'h',sd);
+    ballDraw(bx,by,R);
+    const vt=Lp*pom*46*(Lpx/200);if(Math.abs(vt)>4)vArrow(bx,by,Math.cos(pth)*vt,-Math.sin(pth)*vt,RED,'');
     msg='Pendule : au point haut, tout est potentiel (v=0) ; au point bas, tout est cinétique (v max). '+(fric?'Le frottement réduit l\'amplitude à chaque passage.':'Sans frottement, il revient à la même hauteur.');
   }
 
@@ -274,7 +332,7 @@ reset();draw();
 </section></main>
 <aside class="sfa-side">
   <div class="sfa-list"><h2>PH4 · Travail, énergie, puissance<span>5 simulations</span></h2><ol><li><a href="https://sfascienceforall-cell.github.io/Travil/"><i>01</i>Travail d&#x27;une force</a></li><li><a href="https://sfascienceforall-cell.github.io/Travail-gravite/"><i>02</i>Travail de la gravité</a></li><li><a href="https://sfascienceforall-cell.github.io/-n-rgies/"><i>03</i>Énergies</a></li><li><a class="on" aria-current="page" href="https://sfascienceforall-cell.github.io/energie-exemples/"><i>04</i>Énergie : exemples</a></li><li><a href="https://sfascienceforall-cell.github.io/energie_ressort/"><i>05</i>Énergie d&#x27;un ressort</a></li></ol></div>
-  <div class="sfa-promo"><small>Envie d'aller plus loin ?</small><b>La prépa SFA : le cours complet, les exercices type examen corrigés et le suivi.</b><a href="#">Voir la prépa</a></div>
+  <div class="sfa-promo"><small>Envie d'aller plus loin ?</small><b>La prépa SFA : le cours complet, les exercices type examen corrigés et le suivi.</b><a href="https://sfascienceforall-cell.github.io/simulations/prepa/">Voir la prépa</a></div>
 </aside></div></div>
 <footer class="sfa-foot">Science For All · simulations interactives de physique</footer>
 </body>
